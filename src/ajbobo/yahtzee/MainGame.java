@@ -17,6 +17,10 @@ public class MainGame extends Activity
 	private Die _dice[];
 	
 	private GridView grid;
+	Integer scorebuttons[] = {
+			R.id.btnAces, R.id.btnTwos, R.id.btnThrees, R.id.btnFours, R.id.btnFives, R.id.btnSixes,
+			R.id.btn3ofakind, R.id.btn4ofakind, R.id.btnSmStraight, R.id.btnLgStraight, R.id.btnFullHouse, R.id.btnYahtzee, R.id.btnChance
+	};
 	
 	/** Called when the activity is first created. */
 	@Override
@@ -45,6 +49,18 @@ public class MainGame extends Activity
 				grid.invalidateViews();
 			}
 		});
+		
+		for (int x = 0; x < 13; x++)
+		{
+			Button scorebutton = (Button) findViewById(scorebuttons[x]);
+			scorebutton.setOnClickListener(new OnClickListener()
+			{
+				public void onClick(View v)
+				{
+					ScoreField((Button)v);
+				}
+			});
+		}
 		
 		SetupGame();
 	}
@@ -83,12 +99,27 @@ public class MainGame extends Activity
 		}
 	}
 	
+	/** Add the score to the selected box */
+	public void ScoreField(Button button)
+	{
+		// Make sure the field doesn't already have a score
+		String curtext = button.getText().toString();
+		if (curtext.length() != 0)
+		{
+			showToast("That field already has a score");
+			return;
+		}
+		
+		button.setText("123");
+	}
+
+	
 	/** Returns the specified Die */
 	public Die GetDie(int index)
 	{
 		return _dice[index];
 	}
-	
+		
 	/** Display a short Toast with the specified text */
 	public void showToast(String msg)
 	{

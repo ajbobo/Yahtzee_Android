@@ -4,7 +4,6 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
-    
 	<Button  
 		android:id="@+id/btnRollDice"
 	    android:layout_width="120dp" 
@@ -12,7 +11,6 @@
 	    android:layout_alignParentBottom="true"
 	    android:layout_centerHorizontal="true"
 	    android:text="Roll Dice" />
-	    
 	<GridView
 		android:id="@+id/grdDice"
 		android:layout_width="fill_parent"
@@ -20,5 +18,128 @@
 		android:layout_above="@+id/btnRollDice"
 		android:gravity="center"
 		android:numColumns="5" />
-    
+	<TableLayout
+		android:id="@+id/tblScores"
+		android:layout_height="fill_parent"
+		android:layout_width="fill_parent" 
+		android:layout_above="@+id/grdDice">
+		<TableRow>
+			<TextView
+				android:id="@+id/lblAces"
+				android:text="Aces" />
+			<Button
+				android:id="@+id/btnAces" 
+				android:width="70dp" 
+				android:layout_marginLeft="10dp"
+				android:layout_marginRight="10dp" />
+			<TextView
+				android:id="@+id/lblFours"
+				android:text="Fours" />
+			<Button
+				android:id="@+id/btnFours" 
+				android:width="70dp" 
+				android:layout_marginLeft="10dp"
+				android:layout_marginRight="10dp" />
+		</TableRow>		
+		<TableRow>
+			<TextView
+				android:id="@+id/lblTwos"
+				android:text="Twos" />
+			<Button
+				android:id="@+id/btnTwos" 
+				android:width="70dp" 
+				android:layout_marginLeft="10dp"
+				android:layout_marginRight="10dp" />
+			<TextView
+				android:id="@+id/lblFives"
+				android:text="Fives" />
+			<Button
+				android:id="@+id/btnFives" 
+				android:width="70dp" 
+				android:layout_marginLeft="10dp"
+				android:layout_marginRight="10dp" />
+		</TableRow>		
+		<TableRow>
+			<TextView
+				android:id="@+id/lblThrees"
+				android:text="Threes" />
+			<Button
+				android:id="@+id/btnThrees" 
+				android:width="70dp" 
+				android:layout_marginLeft="10dp"
+				android:layout_marginRight="10dp" />
+			<TextView
+				android:id="@+id/lblSixes"
+				android:text="Sixes" />
+			<Button
+				android:id="@+id/btnSixes" 
+				android:width="70dp" 
+				android:layout_marginLeft="10dp"
+				android:layout_marginRight="10dp" />
+		</TableRow>		
+		<TableRow>
+			<TextView
+				android:id="@+id/lbl3ofakind"
+				android:text="3 of a kind" />
+			<Button
+				android:id="@+id/btn3ofakind" 
+				android:width="70dp" 
+				android:layout_marginLeft="10dp"
+				android:layout_marginRight="10dp" />
+			<TextView
+				android:id="@+id/lbl4ofakind"
+				android:text="4 of a kind" />
+			<Button
+				android:id="@+id/btn4ofakind" 
+				android:width="70dp" 
+				android:layout_marginLeft="10dp"
+				android:layout_marginRight="10dp" />
+		</TableRow>		
+		<TableRow>
+			<TextView
+				android:id="@+id/lblSmStraight"
+				android:text="Sm. Straight" />
+			<Button
+				android:id="@+id/btnSmStraight" 
+				android:width="70dp" 
+				android:layout_marginLeft="10dp"
+				android:layout_marginRight="10dp" />
+			<TextView
+				android:id="@+id/lblLgStraight"
+				android:text="Lg. Straight" />
+			<Button
+				android:id="@+id/btnLgStraight" 
+				android:width="70dp" 
+				android:layout_marginLeft="10dp"
+				android:layout_marginRight="10dp" />
+		</TableRow>		
+		<TableRow>
+			<TextView
+				android:id="@+id/lblFullHouse"
+				android:text="Full House" />
+			<Button
+				android:id="@+id/btnFullHouse" 
+				android:width="70dp" 
+				android:layout_marginLeft="10dp"
+				android:layout_marginRight="10dp" />
+			<TextView
+				android:id="@+id/lblYahtzee"
+				android:text="Yahtzee" />
+			<Button
+				android:id="@+id/btnYahtzee" 
+				android:width="70dp" 
+				android:layout_marginLeft="10dp"
+				android:layout_marginRight="10dp" />
+		</TableRow>		
+		<TableRow>
+			<TextView
+				android:id="@+id/lblChance"
+				android:text="Chance" />
+			<Button
+				android:id="@+id/btnChance" 
+				android:width="70dp" 
+				android:layout_marginLeft="10dp"
+				android:layout_marginRight="10dp" />
+		</TableRow>		
+	</TableLayout>
 </RelativeLayout>
