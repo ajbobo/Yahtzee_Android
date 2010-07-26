@@ -8,7 +8,7 @@ public class Die
 	public Die()
 	{
 		setChecked(false);
-		_value = 0;
+		setValue(0);
 	}
 
 	public void setValue(int _value)

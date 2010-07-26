@@ -15,6 +15,8 @@ public class MainGame extends Activity
 {
 	private Random _rnd;
 	private Die _dice[];
+	private Player _player;
+	private Rules _rules;
 	
 	private GridView grid;
 	Integer scorebuttons[] = {
@@ -70,6 +72,9 @@ public class MainGame extends Activity
 	{
 		_rnd = new Random();
 		
+		_player = new Player();
+		_player.clearScores();
+		_rules = new Rules();
 		_dice = new Die[5];
 		for (int x = 0; x < 5; x++)
 		{
@@ -112,7 +117,6 @@ public class MainGame extends Activity
 		
 		button.setText("123");
 	}
-
 	
 	/** Returns the specified Die */
 	public Die GetDie(int index)
