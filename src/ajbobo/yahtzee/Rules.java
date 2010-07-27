@@ -16,7 +16,7 @@ public class Rules
 	public final int CATEGORY_YAHTZEE = 11;
 	public final int CATEGORY_CHANCE = 12;
 	
-	public void ScorePlayer(Player player, Die dice[], int category)
+	public void scorePlayer(Player player, Die dice[], int category)
 	{
 		switch(category)
 		{
@@ -26,25 +26,25 @@ public class Rules
 		case CATEGORY_FOURS:
 		case CATEGORY_FIVES:
 		case CATEGORY_SIXES:
-			ScoreTopField(player, dice, category); break;
+			scoreTopField(player, dice, category); break;
 		case CATEGORY_3OFAKIND:
-			Score3OfAKind(player, dice); break;
+			score3OfAKind(player, dice); break;
 		case CATEGORY_4OFAKIND:
-			Score4OfAKind(player, dice); break;
+			score4OfAKind(player, dice); break;
 		case CATEGORY_FULLHOUSE:
-			ScoreFullHouse(player, dice); break;
+			scoreFullHouse(player, dice); break;
 		case CATEGORY_SMSTRAIGHT:
-			ScoreSmStraight(player, dice); break;
+			scoreSmStraight(player, dice); break;
 		case CATEGORY_LGSTRAIGHT:
-			ScoreLgStraight(player, dice); break;
+			scoreLgStraight(player, dice); break;
 		case CATEGORY_YAHTZEE:
-			ScoreYahtzee(player, dice); break;
+			scoreYahtzee(player, dice); break;
 		case CATEGORY_CHANCE:
-			ScoreChance(player, dice); break;
+			scoreChance(player, dice); break;
 		}
 	}
 
-	private void ScoreTopField(Player player, Die[] dice, int category)
+	private void scoreTopField(Player player, Die[] dice, int category)
 	{
 		int total = 0;
 		for (int x = 0; x < 5; x++)
@@ -57,49 +57,49 @@ public class Rules
 		player.setScore(category, total);
 	}
 
-	private void Score3OfAKind(Player player, Die[] dice)
+	private void score3OfAKind(Player player, Die[] dice)
 	{
 		// TODO Auto-generated method stub
 		
 		player.setScore(CATEGORY_3OFAKIND, 33);
 	}
 
-	private void Score4OfAKind(Player player, Die[] dice)
+	private void score4OfAKind(Player player, Die[] dice)
 	{
 		// TODO Auto-generated method stub
 		
 		player.setScore(CATEGORY_4OFAKIND, 44);
 	}
 
-	private void ScoreFullHouse(Player player, Die[] dice)
+	private void scoreFullHouse(Player player, Die[] dice)
 	{
 		// TODO Auto-generated method stub
 		
 		player.setScore(CATEGORY_FULLHOUSE,34);
 	}
 
-	private void ScoreSmStraight(Player player, Die[] dice)
+	private void scoreSmStraight(Player player, Die[] dice)
 	{
 		// TODO Auto-generated method stub
 		
 		player.setScore(CATEGORY_SMSTRAIGHT, 123);
 	}
 
-	private void ScoreLgStraight(Player player, Die[] dice)
+	private void scoreLgStraight(Player player, Die[] dice)
 	{
 		// TODO Auto-generated method stub
 		
 		player.setScore(CATEGORY_LGSTRAIGHT, 1234);
 	}
 
-	private void ScoreYahtzee(Player player, Die[] dice)
+	private void scoreYahtzee(Player player, Die[] dice)
 	{
 		// TODO Auto-generated method stub
 		
 		player.setScore(CATEGORY_YAHTZEE, 555);
 	}
 
-	private void ScoreChance(Player player, Die[] dice)
+	private void scoreChance(Player player, Die[] dice)
 	{
 		int total = 0;
 		for (int x = 0; x < 5; x++)
