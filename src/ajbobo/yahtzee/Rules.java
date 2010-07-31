@@ -59,44 +59,150 @@ public class Rules
 
 	private void score3OfAKind(Player player, Die[] dice)
 	{
-		// TODO Auto-generated method stub
+		int cnt[] = {0, 0, 0, 0, 0, 0};
+		int score = 0;
 		
-		player.setScore(CATEGORY_3OFAKIND, 33);
+		for (int x = 0; x < 5; x++)
+		{
+			Die die = dice[x];
+			cnt[die.getValue()]++;
+			score += die.getValue() + 1; // Values are 0-5, dice scores are 1-6
+		}
+		
+		boolean have3 = false;
+		for (int x = 0; x < 6; x++)
+		{
+			if (cnt[x] >= 3)
+				have3 = true;
+		}
+		
+		if (have3)
+			player.setScore(CATEGORY_3OFAKIND, score);
+		else
+			player.setScore(CATEGORY_3OFAKIND, 0);
 	}
 
 	private void score4OfAKind(Player player, Die[] dice)
 	{
-		// TODO Auto-generated method stub
+		int cnt[] = {0, 0, 0, 0, 0, 0};
+		int score = 0;
 		
-		player.setScore(CATEGORY_4OFAKIND, 44);
+		for (int x = 0; x < 5; x++)
+		{
+			Die die = dice[x];
+			cnt[die.getValue()]++;
+			score += die.getValue() + 1; // Values are 0-5, dice scores are 1-6
+		}
+		
+		boolean have4 = false;
+		for (int x = 0; x < 6; x++)
+		{
+			if (cnt[x] >= 4)
+				have4 = true;
+		}
+		
+		if (have4)
+			player.setScore(CATEGORY_4OFAKIND, score);
+		else
+			player.setScore(CATEGORY_4OFAKIND, 0);
 	}
 
 	private void scoreFullHouse(Player player, Die[] dice)
 	{
-		// TODO Auto-generated method stub
+		int cnt[] = {0, 0, 0, 0, 0, 0};
 		
-		player.setScore(CATEGORY_FULLHOUSE,34);
+		for (int x = 0; x < 5; x++)
+		{
+			Die die = dice[x];
+			cnt[die.getValue()]++;
+		}
+		
+		boolean have2 = false, have3 = false;
+		for (int x = 0; x < 6; x++)
+		{
+			if (cnt[x] == 2)
+				have2 = true;
+			else if (cnt[x] == 3)
+				have3 = true;
+		}
+		
+		if (have2 && have3)
+			player.setScore(CATEGORY_FULLHOUSE, 25);
+		else
+			player.setScore(CATEGORY_FULLHOUSE, 0);
 	}
 
 	private void scoreSmStraight(Player player, Die[] dice)
 	{
-		// TODO Auto-generated method stub
+		boolean one = false, two = false, three = false, four = false, five = false, six = false;
 		
-		player.setScore(CATEGORY_SMSTRAIGHT, 123);
+		for (int x = 0; x < 5; x++)
+		{
+			Die die = dice[x];
+			switch(die.getValue())
+			{
+			case 0: one = true; break;
+			case 1: two = true; break;
+			case 2: three = true; break;
+			case 3: four = true; break;
+			case 4: five = true; break;
+			case 5: six = true; break;
+			}
+		}
+		
+		boolean straight = false;
+		if ((one && two && three && four) ||
+			 (two && three && four && five) ||
+			 (three && four && five && six))
+			straight = true;
+		
+		if (straight)
+			player.setScore(CATEGORY_SMSTRAIGHT, 30);
+		else
+			player.setScore(CATEGORY_SMSTRAIGHT, 0);
 	}
 
 	private void scoreLgStraight(Player player, Die[] dice)
 	{
-		// TODO Auto-generated method stub
+		boolean one = false, two = false, three = false, four = false, five = false, six = false;
 		
-		player.setScore(CATEGORY_LGSTRAIGHT, 1234);
+		for (int x = 0; x < 5; x++)
+		{
+			Die die = dice[x];
+			switch(die.getValue())
+			{
+			case 0: one = true; break;
+			case 1: two = true; break;
+			case 2: three = true; break;
+			case 3: four = true; break;
+			case 4: five = true; break;
+			case 5: six = true; break;
+			}
+		}
+		
+		boolean straight = false;
+		if ((one && two && three && four && five) ||
+			 (two && three && four && five && six))
+			straight = true;
+		
+		if (straight)
+			player.setScore(CATEGORY_LGSTRAIGHT, 40);
+		else
+			player.setScore(CATEGORY_LGSTRAIGHT, 0);
 	}
 
 	private void scoreYahtzee(Player player, Die[] dice)
 	{
-		// TODO Auto-generated method stub
+		boolean have5 = true;
+		int value = dice[0].getValue();
+		for (int x = 1; x < 5; x++)
+			if (dice[x].getValue() != value)
+				have5 = false;
 		
-		player.setScore(CATEGORY_YAHTZEE, 555);
+		if (have5)
+			player.setScore(CATEGORY_YAHTZEE, 50);
+		else
+			player.setScore(CATEGORY_YAHTZEE, 0);
 	}
 
 	private void scoreChance(Player player, Die[] dice)
