@@ -1,6 +1,7 @@
 package ajbobo.yahtzee;
 
 import android.app.Activity;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -67,6 +68,14 @@ public class MainGame extends Activity
 		SetupGame();
 	}
 	
+	/** Called when a handled configuration changes */
+	@Override
+	public void onConfigurationChanged(Configuration newConfig)
+	{
+	    super.onConfigurationChanged(newConfig);
+	    // Do nothing - I'm handling configuration changes by not changing anything. This way the Activity isn't restarted
+	}
+	
 	/** Initialize the dice and score */
 	private void SetupGame()
 	{
@@ -119,9 +128,9 @@ public class MainGame extends Activity
 		int buttonid = button.getId();
 		switch(buttonid)
 		{
-		case R.id.btnAces:			category = _rules.CATEGORY_ONES;			break;
-		case R.id.btnTwos:			category = _rules.CATEGORY_TWOS;			break;
-		case R.id.btnThrees:			category = _rules.CATEGORY_THREES;		break;
+		case R.id.btnAces:			category = _rules.CATEGORY_ONES;		break;
+		case R.id.btnTwos:			category = _rules.CATEGORY_TWOS;		break;
+		case R.id.btnThrees:		category = _rules.CATEGORY_THREES;		break;
 		case R.id.btnFours:			category = _rules.CATEGORY_FOURS;		break;
 		case R.id.btnFives:			category = _rules.CATEGORY_FIVES;		break;
 		case R.id.btnSixes:			category = _rules.CATEGORY_SIXES;		break;
@@ -131,7 +140,7 @@ public class MainGame extends Activity
 		case R.id.btnSmStraight:	category = _rules.CATEGORY_SMSTRAIGHT;	break;
 		case R.id.btnLgStraight:	category = _rules.CATEGORY_LGSTRAIGHT;	break;
 		case R.id.btnYahtzee:		category = _rules.CATEGORY_YAHTZEE;		break;
-		case R.id.btnChance:			category = _rules.CATEGORY_CHANCE;		break;
+		case R.id.btnChance:		category = _rules.CATEGORY_CHANCE;		break;
 		}
 		
 		_rules.scorePlayer(_player, _dice, category);
