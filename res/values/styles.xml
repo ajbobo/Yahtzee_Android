@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<style name="scorebutton">
-		<item name="android:width">70dp</item>
+		<item name="android:width">65dp</item>
+		<item name="android:height">45dp</item>
 		<item name="android:layout_marginLeft">10dp</item>
 		<item name="android:layout_marginRight">10dp</item>
+		<item name="android:textStyle">bold</item>
+		<item name="android:textSize">22dp</item>
+		<item name="android:background">@android:drawable/editbox_background</item>
+	</style>
+	<style name="fieldcaption">
+		<item name="android:textSize">16dp</item>
 	</style>
 </resources>

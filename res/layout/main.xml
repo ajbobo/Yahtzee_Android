@@ -10,7 +10,9 @@
 	    android:layout_height="wrap_content"
 	    android:layout_alignParentBottom="true"
 	    android:layout_centerHorizontal="true"
-	    android:text="Roll Dice" />
+	    android:text="Roll Dice" 
+	    android:textStyle="bold"
+	    android:textSize="17dp"/>
 	<GridView
 		android:id="@+id/grdDice"
 		android:layout_width="fill_parent"
@@ -26,13 +28,15 @@
 		<TableRow>
 			<TextView
 				android:id="@+id/lblAces"
-				android:text="Aces" />
+				android:text="Aces" 
+				style="@style/fieldcaption" />
 			<Button
 				android:id="@+id/btnAces" 
 				style="@style/scorebutton" />
 			<TextView
 				android:id="@+id/lblFours"
-				android:text="Fours" />
+				android:text="Fours" 
+				style="@style/fieldcaption" />
 			<Button
 				android:id="@+id/btnFours" 
 				style="@style/scorebutton" />
@@ -40,13 +44,15 @@
 		<TableRow>
 			<TextView
 				android:id="@+id/lblTwos"
-				android:text="Twos" />
+				android:text="Twos" 
+				style="@style/fieldcaption" />
 			<Button
 				android:id="@+id/btnTwos" 
 				style="@style/scorebutton" />
 			<TextView
 				android:id="@+id/lblFives"
-				android:text="Fives" />
+				android:text="Fives" 
+				style="@style/fieldcaption" />
 			<Button
 				android:id="@+id/btnFives" 
 				style="@style/scorebutton" />
@@ -54,27 +60,32 @@
 		<TableRow>
 			<TextView
 				android:id="@+id/lblThrees"
-				android:text="Threes" />
+				android:text="Threes" 
+				style="@style/fieldcaption" />
 			<Button
 				android:id="@+id/btnThrees" 
 				style="@style/scorebutton" />
 			<TextView
 				android:id="@+id/lblSixes"
-				android:text="Sixes" />
+				android:text="Sixes" 
+				style="@style/fieldcaption" />
 			<Button
 				android:id="@+id/btnSixes" 
 				style="@style/scorebutton" />
 		</TableRow>		
-		<TableRow>
+		<TableRow
+			android:layout_marginTop="10dp" >
 			<TextView
 				android:id="@+id/lbl3ofakind"
-				android:text="3 of a kind" />
+				android:text="3 of a kind" 
+				style="@style/fieldcaption" />
 			<Button
 				android:id="@+id/btn3ofakind" 
 				style="@style/scorebutton" />
 			<TextView
 				android:id="@+id/lbl4ofakind"
-				android:text="4 of a kind" />
+				android:text="4 of a kind" 
+				style="@style/fieldcaption" />
 			<Button
 				android:id="@+id/btn4ofakind" 
 				style="@style/scorebutton" />
@@ -82,13 +93,15 @@
 		<TableRow>
 			<TextView
 				android:id="@+id/lblSmStraight"
-				android:text="Sm. Straight" />
+				android:text="Sm. Straight" 
+				style="@style/fieldcaption" />
 			<Button
 				android:id="@+id/btnSmStraight" 
 				style="@style/scorebutton" />
 			<TextView
 				android:id="@+id/lblLgStraight"
-				android:text="Lg. Straight" />
+				android:text="Lg. Straight" 
+				style="@style/fieldcaption" />
 			<Button
 				android:id="@+id/btnLgStraight" 
 				style="@style/scorebutton" />
@@ -96,13 +109,15 @@
 		<TableRow>
 			<TextView
 				android:id="@+id/lblFullHouse"
-				android:text="Full House" />
+				android:text="Full House" 
+				style="@style/fieldcaption" />
 			<Button
 				android:id="@+id/btnFullHouse" 
 				style="@style/scorebutton" />
 			<TextView
 				android:id="@+id/lblYahtzee"
-				android:text="Yahtzee" />
+				android:text="Yahtzee" 
+				style="@style/fieldcaption" />
 			<Button
 				android:id="@+id/btnYahtzee" 
 				style="@style/scorebutton" />
@@ -110,7 +125,8 @@
 		<TableRow>
 			<TextView
 				android:id="@+id/lblChance"
-				android:text="Chance" />
+				android:text="Chance" 
+				style="@style/fieldcaption" />
 			<Button
 				android:id="@+id/btnChance" 
 				style="@style/scorebutton" />
