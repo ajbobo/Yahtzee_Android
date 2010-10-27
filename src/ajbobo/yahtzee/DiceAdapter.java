@@ -54,7 +54,7 @@ public class DiceAdapter extends BaseAdapter
 		if (convertView == null) // Not recycling - initialize stuff
 		{
 			iv = new ImageView(_context);
-			iv.setLayoutParams(new GridView.LayoutParams(35,35));
+			iv.setLayoutParams(new GridView.LayoutParams(45,45));
 			iv.setPadding(0, 0, 0, 0);
 		}
 		else
