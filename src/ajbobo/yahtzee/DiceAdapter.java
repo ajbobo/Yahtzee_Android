@@ -4,9 +4,7 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.GridView;
 import android.widget.ImageView;
-
 
 public class DiceAdapter extends BaseAdapter
 {
@@ -50,17 +48,17 @@ public class DiceAdapter extends BaseAdapter
 
 	public View getView(int position, View convertView, ViewGroup parent)
 	{
-		ImageView iv = null;
+		View v = null;
 		if (convertView == null) // Not recycling - initialize stuff
 		{
-			iv = new ImageView(_context);
-			iv.setLayoutParams(new GridView.LayoutParams(45,45));
-			iv.setPadding(0, 0, 0, 0);
+		    v = _context.getLayoutInflater().inflate(R.layout.dieimage, null);
 		}
 		else
 		{
-			iv = (ImageView)convertView;
+		    v = convertView;
 		}
+		
+		ImageView iv = (ImageView)v.findViewById(R.id.imgdie);
 		
 		Integer[] array;
 		Die die = _context.GetDie(position);
@@ -71,8 +69,8 @@ public class DiceAdapter extends BaseAdapter
 		int value = die.getValue();
 		Integer image = array[value];
 		iv.setImageResource(image);
-		
-		return iv;
+
+		return v;
 	}
 
 }
