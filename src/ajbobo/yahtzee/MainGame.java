@@ -5,6 +5,8 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -16,10 +18,15 @@ import java.util.Random;
 
 public class MainGame extends Activity 
 {
+// Constants that are internal to this class
+	private static final int MENU_NEWGAME = Menu.FIRST;
+	
 	private Random _rnd;
 	private Die _dice[];
 	private Player _player;
 	private Rules _rules;
+	private int _rollsleft;
+	private int _turnsleft;
 	
 	private GridView grid;
 	Integer scorebuttons[] = {
@@ -63,10 +70,22 @@ public class MainGame extends Activity
 				public void onClick(View v)
 				{
 					ScoreField((Button)v);
+					grid.invalidateViews();
 				}
 			});
 		}
+
+		// Globals that only need to be set up once
+		_rnd = new Random();
+		_player = new Player();
+		_rules = new Rules();
+		_dice = new Die[5];
+		for (int x = 0; x < 5; x++)
+		{
+			_dice[x] = new Die();
+		}
 		
+		// Set up things that can change between games
 		SetupGame();
 	}
 	
@@ -82,54 +101,78 @@ public class MainGame extends Activity
 	@Override
 	public void onBackPressed()
 	{
-	    AlertDialog.Builder builder = new AlertDialog.Builder(this);
-	    builder.setMessage("Are you sure you want to exit?")
-	           .setCancelable(false)
-	           .setPositiveButton("Yes", new DialogInterface.OnClickListener() 
-	           {
-	               public void onClick(DialogInterface dialog, int id) 
-	               {
-	                    MainGame.this.finish();
-	               }
-	           })
-	           .setNegativeButton("No", new DialogInterface.OnClickListener() 
-	           {
-	               public void onClick(DialogInterface dialog, int id) 
-	               {
-	                    dialog.cancel();
-	               }
-	           });
-	    AlertDialog alert = builder.create();
-	    alert.show();
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setMessage("Are you sure you want to exit?")
+			.setCancelable(false)
+			.setPositiveButton("Yes", new DialogInterface.OnClickListener()
+			{
+				public void onClick(DialogInterface dialog, int id)
+				{
+					MainGame.this.finish();
+				}
+			})
+			.setNegativeButton("No", new DialogInterface.OnClickListener()
+			{
+				public void onClick(DialogInterface dialog, int id)
+				{
+					dialog.cancel();
+				}
+			});
+		AlertDialog alert = builder.create();
+		alert.show();
 	}
+	
+	/** Create menu items */
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu)
+	{
+		menu.add(0, MENU_NEWGAME, 0, "New Game");//.setIcon(android.R.drawable.ic_menu_info_details);
+
+		return true;
+	}
+
+	/** Handle menu items */
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item)
+	{
+		switch (item.getItemId())
+		{
+		case MENU_NEWGAME:	SetupGame(); grid.invalidateViews(); return true;
+		}
+		return false;
+	}
+		
 	
 	/** Initialize the dice and score */
 	private void SetupGame()
 	{
-		_rnd = new Random();
-		
-		_player = new Player();
 		_player.clearScores();
-		_rules = new Rules();
-		_dice = new Die[5];
-		for (int x = 0; x < 5; x++)
+		for (int x = 0; x < 13; x++)
 		{
-			_dice[x] = new Die();
+			Button scorebutton = (Button) findViewById(scorebuttons[x]);
+			scorebutton.setText("");
 		}
-		
-		RollDice();
+
+		_turnsleft = 13;
+		SetupTurn();
 	}
 	
-	/** Toggle the specified Die's selection status */
-	private void HandleClickedDie(int index)
+	/** Set up a turn */
+	private void SetupTurn()
 	{
-		Die die = _dice[index];
-		die.setChecked(!die.isChecked());
+		_rollsleft = 3;
+		for (int x = 0; x < 5; x++)
+		{
+			_dice[x].setChecked(false);
+		}
+		RollDice();
 	}
 	
 	/** Reroll all unselected dice */
 	private void RollDice()
 	{
+		_rollsleft--;
+		
 		for (int x = 0; x < 5; x++)
 		{
 			Die die = _dice[x];
@@ -138,11 +181,24 @@ public class MainGame extends Activity
 				die.setValue(_rnd.nextInt(6)); // Dice are numbered 0-5
 			}
 		}
+		
+		String buttontext = "Roll Dice (" + _rollsleft + ")";
+		Button rolldicebutton = (Button)findViewById(R.id.btnRollDice);
+		rolldicebutton.setText(buttontext);
+		
+		if (_rollsleft == 0)
+			rolldicebutton.setEnabled(false);
+		else
+			rolldicebutton.setEnabled(true);
 	}
 	
 	/** Add the score to the selected box */
 	public void ScoreField(Button button)
 	{
+		// If the game's over, don't do anything
+		if (_turnsleft <= 0)
+			return;
+		
 		// Make sure the field doesn't already have a score
 		String curtext = button.getText().toString();
 		if (curtext.length() != 0)
@@ -151,6 +207,7 @@ public class MainGame extends Activity
 			return;
 		}
 		
+		// Calculate and show the field's new score
 		int category = 0;
 		int buttonid = button.getId();
 		switch(buttonid)
@@ -174,8 +231,61 @@ public class MainGame extends Activity
 		
 		Integer score = _player.getScore(category);
 		button.setText(score.toString());
+		
+		// Set up the next turn or end the game
+		_turnsleft--;
+		if (_turnsleft == 0) // Game over
+		{
+			ShowScore();
+		}
+		else // Set up next turn
+		{
+			SetupTurn();
+		}
 	}
 	
+	private void ShowScore()
+	{
+		// Put together the score message
+		String message;
+		message =  "Upper Section:\t" + _player.getTopScore() + "\n";
+		message += "Upper Bonus:\t\t" + _player.getTopBonus() + "\n";
+		message += "Upper Total:\t\t" + _player.getTopTotal() + "\n";
+		message += "\nLower Total:\t\t\t" + _player.getBottomScore() + "\n";
+		message += "Yahtzee Bonus:\t" + _player.getYahtzeeBonus() + "\n";
+		message += "\nTotal Score:\t\t\t" + _player.getTotalScore() + "\n";
+		message += "\nDo you want to play again?";
+		
+		// Display the score
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setMessage(message)
+			.setCancelable(false)
+			.setPositiveButton("Yes", new DialogInterface.OnClickListener()
+			{
+				public void onClick(DialogInterface dialog, int id)
+				{
+					SetupGame(); grid.invalidateViews();
+				}
+			})
+			.setNegativeButton("No", new DialogInterface.OnClickListener()
+			{
+				public void onClick(DialogInterface dialog, int id)
+				{
+					MainGame.this.finish();
+				}
+			})
+			.setTitle("Final Score");
+		AlertDialog alert = builder.create();
+		alert.show();
+	}
+	
+	/** Toggle the specified Die's selection status */
+	private void HandleClickedDie(int index)
+	{
+		Die die = _dice[index];
+		die.setChecked(!die.isChecked());
+	}
+
 	/** Returns the specified Die */
 	public Die GetDie(int index)
 	{
