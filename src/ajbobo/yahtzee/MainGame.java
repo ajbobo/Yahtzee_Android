@@ -126,7 +126,7 @@ public class MainGame extends Activity
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
-		menu.add(0, MENU_NEWGAME, 0, "New Game");//.setIcon(android.R.drawable.ic_menu_info_details);
+		menu.add(0, MENU_NEWGAME, 0, "New Game").setIcon(android.R.drawable.ic_menu_revert);
 
 		return true;
 	}
